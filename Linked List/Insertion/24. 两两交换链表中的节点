@@ -1,0 +1,25 @@
+For the two nodes to be exchanged, our idea is to insert the second node before the first node. For example: `pre -> head -> head.next -> head.next.next`, it should become: `pre -> head.next -> head -> head.next.next`. Then, `pre` moves forward two places, `head` forward one place, and continue to exchange.
+
+For the convenience of writing code, you can create several more variables to represent the nodes of the linked list, such as：`pre -> head -> next -> temp`, it should become: `pre -> next -> head -> temp`.
+
+The time complexity is `O(n)`, the space complexity is `O(1)`.
+
+```java
+public ListNode swapPairs(ListNode head) {
+    ListNode dummy = new ListNode();
+    dummy.next = head;
+    ListNode pre = dummy;
+    while (head != null && head.next != null) {
+        /**************************/
+        ListNode next = head.next;
+        ListNode temp = next.next;
+        pre.next = next;
+        next.next = head;
+        head.next = temp;
+        /**************************/
+        head = head.next;
+        pre = pre.next.next;
+    }
+    return dummy.next;
+}
+```
