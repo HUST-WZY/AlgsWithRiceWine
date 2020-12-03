@@ -60,3 +60,32 @@ public int[] nextGreaterElement(int[] nums1, int[] nums2) {
     return ans;
 }
 ```
+
+* 方法二
+方法一很直观，但明显用了多余的空间。我们可以首先把`nums1`中的值和索引装进`map`中，即反向映射一下；然后遍历`nums2`，当遍历到的`nums2[i]`为`map`中的键时，就判断它很栈中元素的关系；否则，就直接进行下一个遍历。注意，不管`nums2[i]`是否为键，都要入栈的。
+
+```java
+public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+    int n1 = nums1.length;
+    int n2 = nums2.length;
+    Map<Integer, Integer> map = new HashMap<>();
+    for (int i = 0; i < n1; ++i) {
+        map.put(nums1[i], i);
+    }
+    int[] ans = new int[n1];
+    Deque<Integer> s = new LinkedList<>();
+    for (int i = n2 - 1; i >= 0; --i) {
+        int cur = nums2[i];
+        if (map.containsKey(cur)) {
+            while (!s.isEmpty() && cur >= s.peek()) {
+                s.pop();
+            }
+            ans[map.get(cur)] = s.isEmpty() ? -1 : s.peek();
+        }
+        s.push(cur);
+    }
+    return ans;
+}
+```
+
+方法二的空间复杂度更优，方法一的时间复杂度更优。
