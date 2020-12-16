@@ -1,0 +1,39 @@
+这题应该还是能想到用 `map` 的，但是要注意，是双向映射：从字母到单词，单词需要跟子母匹配；从单词到字母，字母也要跟单词匹配。如果只考虑从字母到单词，在某种情况下就会出错，如`"abba"` 和 `"dog dog dog dog"`，前面的 a 和 b 都跟 dog 对应了，那最后一个 a，是跟第一个 a 对应的一样的，所以也会被代码认为是对的，但这显然是不对的，所以我们要建立双向映射。
+
+另外还要注意两点：一开始检查一下数量是否能对应上，如果数量都对应不上，就直接不行了；字符串比较，应该用`a.equals(b)`，不能用等号。
+
+时间复杂度为`O(n + m)`，空间复杂度最坏为`O(n + m)`。其中，`n`为`pattern`的长度，`m`为`s`的长度，注意是长度，就是有多少个字符。
+
+```java
+public boolean wordPattern(String pattern, String s) {
+
+    Map<Character, String> map1 = new HashMap<>();
+    Map<String, Character> map2 = new HashMap<>();
+
+    String[] S = s.split(" ");
+    char[] P = pattern.toCharArray();
+
+    if (S.length != P.length) {
+        return false;
+    }
+
+    for (int i = 0; i < P.length; ++i) {
+        if (map1.containsKey(P[i])) {
+            if (!map1.get(P[i]).equals(S[i])) {
+                return false;
+            }
+        } else {
+            map1.put(P[i], S[i]);
+        }
+        if (map2.containsKey(S[i])) {
+            if (!map2.get(S[i]).equals(P[i])) {
+                return false;
+            }
+        } else {
+            map2.put(S[i], P[i]);
+        }
+    }
+    return true;
+
+}
+```
