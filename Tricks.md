@@ -28,3 +28,34 @@ public int stringSize(int x) {
     * 链表实现
     
 根据实际测试，中间的方法最慢，第一种方法跟第三种方法差不多，第三种更快。
+
+
+# 最大公约数
+
+欧几里得的辗转相除法，在《算法4》中讲递归时提到了，主要基于两个事实：
+
+* 对于两个非负整数，如果其中一个是`0`，那么最大公约数`gcd`就是另外一个数；
+* 对于两个正整数，它们两个的`gcd`，等于，较小的数与它们两个相除得到的余数的`gcd`相同。
+
+在调用该方法时，应该保证`max >= min`。而在之后的递归中，就自动保证了`min >= max % min`。
+
+```java
+public int gcd(int max, int min) {
+    if (min == 0) {
+        return min;
+    }
+    return gcd(min, max % min);	
+}
+```
+
+# 最小公倍数
+
+计算方法主要基于下面的事实：
+
+* 两个非负整数的最小公倍数，与它们的最大公约数的乘积，等于它们两个的乘积
+
+```java
+public int lcm(int max, int min) {
+    return max * min / gcd(max, min);
+}
+```
