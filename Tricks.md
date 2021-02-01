@@ -70,8 +70,8 @@ char c;
 String s = Character.toString(c);
 
 int i;
-String s = Integer.toString();
+String s = Integer.toString(i);
 
 double d;
-String s = Double.toString();
+String s = Double.toString(d);
 ```
