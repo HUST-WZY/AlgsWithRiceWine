@@ -59,3 +59,19 @@ public int lcm(int max, int min) {
     return max * min / gcd(max, min);
 }
 ```
+
+
+# 转字符串
+
+将 char、int、double 转成 **字符串 String**，一种简单的方法是 `+ ""`。但是这种方法的效率不高，高效的做法是
+
+```java
+char c;
+String s = Character.toString(c);
+
+int i;
+String s = Integer.toString();
+
+double d;
+String s = Double.toString();
+```
