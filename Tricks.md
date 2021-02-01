@@ -63,7 +63,7 @@ public int lcm(int max, int min) {
 
 # 转字符串
 
-将 char、、int、double 转成 **字符串 String**，一种简单的方法是 `+ ""`。但是这种方法的效率不高，高效的做法是下面的。
+将 char、int、double 转成 **字符串 String**，一种简单的方法是 `+ ""`。但是这种方法的效率不高，高效的做法是下面的。
 同时记录一种将 char[] 转为 **字符串 String**的方法
 
 ```java
