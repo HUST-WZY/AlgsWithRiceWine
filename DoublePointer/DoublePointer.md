@@ -13,9 +13,12 @@ public void doublePointer(int[] nums) {
     int hi = 0;
     
     while (hi < n) {
+        // 对指针 hi 操作，将 hi 对应的元素加入窗口
         if (!双指针之间的元素满足某一条件) {
+            // 对指针 lo 操作，将 lo 对应的元素移出窗口
             lo++;
         }
+        // 对更新后的双指针区间操作
         hi++;
     }
 }
