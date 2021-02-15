@@ -88,7 +88,35 @@ private boolean inRange(int r, int c, int n) {
 }
 ```
 
-对于矩阵来说，还有一种手动去重的方法：如果我们知道矩阵中元素的值都应该是正值，那就当我们遍历过一个位置之后，就把它的值设为`-1`；那每次在遍历之前，就先判断一下当前元素的是否为正值。
+对于矩阵来说，还有一种手动去重的方法：比如，如果我们知道矩阵中元素的值都应该是正值，那就当我们遍历过一个位置之后，就把它的值设为`-1`；那每次在遍历之前，就先判断一下当前元素的是否为正值。注意这种方法，标记已经访问的位置要发生变化。
+
+```java
+private int[][] directs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
+public void dfs(int[][] nums, int r, int c) {
+    int m = nums.length;
+    int n = nums[0].length;
+    if (r == m - 1 && c == n - 1) {
+        return;
+    }
+    
+    nums[r][c] = -1;
+    
+    for (int[] direct : directs) {
+        int newR = r + direct[0];
+        int newC = c + direct[1];
+        if (!inRange(newR, newC, n) && nums[newR][newC] == -1) {
+            continue;
+        }
+        
+        dfs(nums, newR, newC);
+    }
+}
+
+private boolean inRange(int r, int c, int n) {
+    return r >= 0 && r < n && c >= 0 && c < n;
+}
+```
 
 ## 需要回溯
 
