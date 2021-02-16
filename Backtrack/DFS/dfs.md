@@ -49,9 +49,7 @@ public void dfs (TreeNode root, int n) {
 
 
 ```java
-private Set<Node> visited = new HashSet<>();
-
-public void dfs(Node u) {
+public void dfs(Node u, Set<Node> visited) {
     if (u == null) {
         return;
     }
@@ -64,7 +62,7 @@ public void dfs(Node u) {
     // 对 u 进行操作
     
     for (Node v : u.neibor()) {
-        dfs(v);
+        dfs(v, visited);
     }
 }
 ```
@@ -73,9 +71,8 @@ public void dfs(Node u) {
 
 ```java
 private int[][] directs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-private boolean[][] visited;
 
-public void dfs(int[][] nums, int r, int c) {
+public void dfs(int[][] nums, int r, int c, boolean[][] visited) {
     int m = nums.length;
     int n = nums[0].length;
     if (r == m - 1 && c == n - 1) {
@@ -96,7 +93,7 @@ public void dfs(int[][] nums, int r, int c) {
             continue;
         }
         
-        dfs(nums, newR, newC);
+        dfs(nums, newR, newC, visited);
     }
 }
 
